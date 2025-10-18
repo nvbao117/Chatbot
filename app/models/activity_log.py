@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 import uuid
 from app.database import Base
 
-class ActivityLog(Base):
+class ActivityLog(Base):    
     __tablename__ = "activity_logs"
     
     log_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -13,7 +13,7 @@ class ActivityLog(Base):
     activity_type = Column(String(20), nullable=False, index=True)  # 'login', 'logout', 'chat', 'quiz', 'file_upload', 'progress_update'
     activity_description = Column(Text)
     subject_id = Column(Integer, ForeignKey("subjects.subject_id", ondelete="SET NULL"), nullable=True)
-    metadata = Column(JSONB)
+    activity_metadata = Column(JSONB)
     ip_address = Column(INET)
     user_agent = Column(Text)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), index=True)
