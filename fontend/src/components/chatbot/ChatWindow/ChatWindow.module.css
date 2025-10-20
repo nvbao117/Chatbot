@@ -1,0 +1,96 @@
+.chat-window {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  overflow: hidden;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #999;
+  text-align: center;
+}
+
+.empty-icon {
+  color: #ddd;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  margin: 0.5rem 0;
+  font-size: 1.25rem;
+  color: #666;
+}
+
+.empty-state p {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.95rem;
+  color: #999;
+}
+
+.empty-tips {
+  margin-top: 1.5rem;
+  text-align: left;
+  background: #f0f4ff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  max-width: 300px;
+}
+
+.empty-tips p {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  color: #667eea;
+  font-weight: 500;
+}
+
+.empty-tips ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style: none;
+}
+
+.empty-tips li {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0.25rem 0;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.empty-tips li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #667eea;
+}

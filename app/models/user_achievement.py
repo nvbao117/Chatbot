@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 import uuid
-from app.database import Base
+from app.db.database import Base
 
 class UserAchievement(Base):
     __tablename__ = "user_achievements"

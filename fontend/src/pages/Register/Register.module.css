@@ -1,0 +1,604 @@
+/* Ultra Modern Register Page */
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animated Background */
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floatingShapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.shape1, .shape2, .shape3, .shape4, .shape5 {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  animation: float 20s infinite linear;
+}
+
+.shape1 {
+  width: 80px;
+  height: 80px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.shape2 {
+  width: 120px;
+  height: 120px;
+  top: 60%;
+  right: 15%;
+  animation-delay: -5s;
+}
+
+.shape3 {
+  width: 60px;
+  height: 60px;
+  top: 80%;
+  left: 20%;
+  animation-delay: -10s;
+}
+
+.shape4 {
+  width: 100px;
+  height: 100px;
+  top: 30%;
+  right: 30%;
+  animation-delay: -15s;
+}
+
+.shape5 {
+  width: 140px;
+  height: 140px;
+  top: 10%;
+  left: 50%;
+  animation-delay: -8s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-30px) rotate(120deg);
+  }
+  66% {
+    transform: translateY(15px) rotate(240deg);
+  }
+}
+
+.mouseFollower {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+/* Main Content */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  max-width: 1000px;
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  height: 100%;
+}
+
+/* Hero Section */
+.heroSection {
+  color: white;
+  padding: 1rem 0;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100%;
+  justify-content: center;
+}
+
+.branding {
+  text-align: center;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.logoIcon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(20px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: pulse 3s infinite;
+}
+
+.logoInner {
+  font-size: 2.5rem;
+  animation: bounce 2s infinite;
+}
+
+.logo {
+  font-size: 3.5rem;
+  margin: 0;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.tagline {
+  font-size: 1.3rem;
+  margin: 0;
+  opacity: 0.9;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+/* Features Carousel */
+.featuresCarousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  max-height: 250px;
+}
+
+.carouselTrack {
+  display: flex;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.featureSlide {
+  min-width: 100%;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.featureCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(20px);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+.featureCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+  animation: float 3s ease-in-out infinite;
+}
+
+.featureTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.featureDescription {
+  font-size: 0.95rem;
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.5;
+  color: white;
+}
+
+.carouselDots {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: white;
+  transform: scale(1.3);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
+}
+
+/* Benefits Section */
+.benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.benefitItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.benefitItem:hover {
+  transform: translateX(10px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.benefitIcon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.benefitText {
+  flex: 1;
+}
+
+.benefitTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
+.benefitDesc {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Form Section */
+.formSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formContainer {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(30px);
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 450px;
+}
+
+.formContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
+  background-size: 400% 400%;
+  animation: gradientShift 3s ease infinite;
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: #666;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* Social Login */
+.socialLogin {
+  margin: 2rem 0;
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ddd, transparent);
+}
+
+.divider span {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0 1.5rem;
+  color: #999;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
+}
+
+.socialButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.socialButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 1rem;
+  background: white;
+  color: #333;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.socialButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-color: #667eea;
+}
+
+.socialIcon {
+  font-size: 1.2rem;
+}
+
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .heroSection {
+    order: 2;
+  }
+
+  .formSection {
+    order: 1;
+  }
+
+  .benefits {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .benefitItem {
+    flex-direction: column;
+    text-align: center;
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0.5rem;
+  }
+
+  .content {
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  .formContainer {
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    max-width: 100%;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+
+  .logoIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .logoInner {
+    font-size: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .featureCard {
+    padding: 1.5rem;
+  }
+
+  .featureIcon {
+    font-size: 2rem;
+  }
+
+  .featureTitle {
+    font-size: 1.25rem;
+  }
+
+  .heroSection {
+    padding: 0.5rem 0;
+  }
+
+  .heroContent {
+    gap: 1rem;
+  }
+
+  .featuresCarousel {
+    max-height: 200px;
+  }
+
+  .featureSlide {
+    min-height: 150px;
+    padding: 1rem 0.75rem;
+  }
+
+  .benefits {
+    flex-direction: column;
+  }
+
+  .benefitItem {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .socialButtons {
+    flex-direction: column;
+  }
+
+  .accountCard {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formContainer {
+    padding: 1.5rem;
+  }
+
+  .logo {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .featureCard {
+    padding: 1.5rem;
+  }
+}

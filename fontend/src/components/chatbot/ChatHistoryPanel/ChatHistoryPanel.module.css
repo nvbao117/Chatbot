@@ -1,0 +1,163 @@
+.historyPanel {
+  position: relative;
+  display: inline-block;
+}
+
+.toggleButton {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.toggleButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.historyDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e5e7eb;
+  min-width: 300px;
+  max-width: 400px;
+  z-index: 1000;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  background: linear-gradient(135deg, #f8f9fa, #ffffff);
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+
+.historyHeader h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.clearButton {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.historyList {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.emptyState {
+  padding: 2rem;
+  text-align: center;
+  color: #666;
+}
+
+.historyItem {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.historyItem:hover {
+  background: #f8f9fa;
+  border-color: #e5e7eb;
+}
+
+.historyContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.historyTitle {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.historyPreview {
+  color: #666;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.historyDate {
+  color: #999;
+  font-size: 0.75rem;
+}
+
+.loadButton {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  margin-left: 0.5rem;
+}
+
+.loadButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .historyDropdown {
+    min-width: 250px;
+    max-width: 300px;
+  }
+  
+  .historyHeader {
+    padding: 0.75rem;
+  }
+  
+  .historyItem {
+    padding: 0.5rem;
+  }
+}
