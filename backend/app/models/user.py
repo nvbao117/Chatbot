@@ -3,7 +3,8 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship 
 import uuid 
-from app.db.database import Base  
+from backend.app.db import Base
+
 
 class User(Base): 
     __tablename__ = "users" 
@@ -31,4 +32,5 @@ class User(Base):
     user_achievements = relationship("UserAchievement", back_populates="user", cascade="all, delete-orphan")
     uploaded_files = relationship("UploadedFile", back_populates="user", cascade="all, delete-orphan")
     activity_logs = relationship("ActivityLog", back_populates="user", cascade="all, delete-orphan")
-    created_questions = relationship("QuizQuestion", back_populates="creator")
+    created_questions = relationship("QuizQuestion", back_populates="creator") 
+    quiz_answers = relationship("QuizAnswer", back_populates="user", cascade="all, delete-orphan")

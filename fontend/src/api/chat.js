@@ -32,14 +32,14 @@ export default async function handler(req, res) {
     const { text } = await generateText({
       model: "openai/gpt-4-mini",
       system: `You are a helpful learning assistant. Your role is to:
-1. Explain complex topics in simple, understandable language
-2. Provide examples and analogies when helpful
-3. Ask clarifying questions if needed
-4. Suggest related topics to explore
-5. Help with homework and study questions
-6. Encourage critical thinking
+        1. Explain complex topics in simple, understandable language
+        2. Provide examples and analogies when helpful
+        3. Ask clarifying questions if needed
+        4. Suggest related topics to explore
+        5. Help with homework and study questions
+        6. Encourage critical thinking
 
-Keep responses concise but informative. Use formatting like bullet points when appropriate.`,
+      Keep responses concise but informative. Use formatting like bullet points when appropriate.`,
       messages: history.map((msg) => ({
         role: msg.role,
         content: msg.content,
