@@ -16,7 +16,7 @@
 export const APP_CONFIG = {
   appName: "EduLearn",                                        // Tên ứng dụng
   appVersion: "1.0.0",                                       // Phiên bản
-  apiBaseUrl: import.meta.env.VITE_API_BASE_URL || "http://localhost:3001/api", // Base URL API
+  apiBaseUrl: import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api/v1", // Base URL API
   environment: import.meta.env.MODE,                         // Môi trường (dev/prod)
   debug: import.meta.env.DEV,                                // Debug mode
 }

@@ -13,8 +13,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../../../hooks"
 import { Button, Input, Alert } from "@/components/common"
-import { validateEmail, validatePassword } from "../../../utils/validators"
-import styles from "./LoginForm.module.css"
+import { validatePassword } from "../../../utils/validators"
+ import styles from "./LoginForm.module.css"
 
 export const LoginForm = () => {
   // Hook navigation để chuyển trang sau khi đăng nhập thành công
@@ -24,7 +24,7 @@ export const LoginForm = () => {
   const { login, loading, error } = useAuth()
   
   // State quản lý dữ liệu form
-  const [formData, setFormData] = useState({ email: "", password: "" })
+  const [formData, setFormData] = useState({ identifier: "", password: "" })
   
   // State quản lý lỗi validation
   const [errors, setErrors] = useState({})
@@ -36,10 +36,10 @@ export const LoginForm = () => {
     setErrors((prev) => ({ ...prev, [name]: "" }))
   }
 
-  // Function validation form - kiểm tra email và password hợp lệ
+  // Function validation form - kiểm tra email/username và password hợp lệ
   const validateForm = () => {
     const newErrors = {}
-    if (!validateEmail(formData.email)) newErrors.email = "Invalid email address"
+    if (!formData.identifier.trim()) newErrors.identifier = "Please enter your email or username"
     if (!validatePassword(formData.password)) newErrors.password = "Password must be at least 8 characters"
     return newErrors
   }
@@ -57,7 +57,7 @@ export const LoginForm = () => {
 
     try {
       // Gọi API đăng nhập và chuyển đến dashboard
-      await login(formData.email, formData.password)
+      await login(formData.identifier, formData.password)
       navigate("/dashboard")
     } catch (err) {
       console.error("Login error:", err)
@@ -70,13 +70,13 @@ export const LoginForm = () => {
 
       <div className={styles.inputGroup}>
         <Input
-          label="Email Address"
-          type="email"
-          name="email"
-          value={formData.email}
+          label="Email or Username"
+          type="text"
+          name="identifier"
+          value={formData.identifier}
           onChange={handleChange}
-          error={errors.email}
-          placeholder="Enter your email"
+          error={errors.identifier}
+          placeholder="Enter your email or username"
           icon="📧"
         />
       </div>

@@ -3,7 +3,6 @@ import { ChatHistoryPanel } from "../../components/chatbot/ChatHistoryPanel"
 import styles from "./ChatPage.module.css"
 
 export const ChatPage = () => {
-  // Load chat history from localStorage
   const loadChatHistory = () => {
     const saved = localStorage.getItem('chatHistory')
     if (saved) {

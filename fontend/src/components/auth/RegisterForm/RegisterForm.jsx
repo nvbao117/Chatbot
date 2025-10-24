@@ -12,7 +12,9 @@ export const RegisterForm = () => {
     username: "",
     email: "",
     password: "",
+    full_name: "",
     confirmPassword: "",
+    date_of_birth: "",
   })
   const [errors, setErrors] = useState({})
 
@@ -20,7 +22,7 @@ export const RegisterForm = () => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
     setErrors((prev) => ({ ...prev, [name]: "" }))
-  }
+  }   
 
   const validateForm = () => {
     const newErrors = {}
@@ -28,6 +30,8 @@ export const RegisterForm = () => {
     if (!validateEmail(formData.email)) newErrors.email = "Invalid email address"
     if (!validatePassword(formData.password)) newErrors.password = "Password must be at least 8 characters"
     if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = "Passwords do not match"
+    if (!formData.full_name.trim()) newErrors.full_name = "Full name is required"
+    if (!formData.date_of_birth) newErrors.date_of_birth = "Birthdate is required" 
     return newErrors
   }
 
@@ -45,6 +49,8 @@ export const RegisterForm = () => {
         username: formData.username,
         email: formData.email,
         password: formData.password,
+        full_name: formData.full_name, 
+        date_of_birth: formData.date_of_birth, 
       })
       navigate("/dashboard")
     } catch (err) {
@@ -68,7 +74,18 @@ export const RegisterForm = () => {
           icon="👤"
         />
       </div>
-
+      <div className={styles.inputGroup}>
+        <Input
+          label="Full Name"
+          type="text"
+          name="full_name"
+          value={formData.full_name}
+          onChange={handleChange}
+          error={errors.full_name}
+          placeholder="Enter your full name"
+          icon="🧑‍💼"
+        />
+      </div>
       <div className={styles.inputGroup}>
         <Input
           label="Email Address"
@@ -81,7 +98,18 @@ export const RegisterForm = () => {
           icon="📧"
         />
       </div>
-
+      <div>
+        <Input 
+          label="Birthdate"
+          type="date"
+          name="date_of_birth" 
+          value={formData.date_of_birth}
+          onChange={handleChange} 
+          error = {errors.date_of_birth} 
+          placeholder="Select your birth date" 
+          icon="🎂"
+        />
+      </div>
       <div className={styles.inputGroup}>
         <Input
           label="Password"

@@ -14,7 +14,7 @@ class UserBase(BaseModel):
     timezone: str = "Asia/Ho_Chi_Minh"
 
 class UserCreate(UserBase):
-    password: str = Field(..., min_length=6, max_length=100)
+    password: str = Field(..., min_length=8, max_length=100)
     
 class UserUpdate(BaseModel):
     full_name: Optional[str] = Field(None, min_length=1, max_length=100)
@@ -22,7 +22,7 @@ class UserUpdate(BaseModel):
     learning_level: Optional[str] = None
     preferred_language: Optional[str] = None
     timezone: Optional[str] = None
-    password: Optional[str] = Field(None, min_length=6, max_length=100)
+    password: Optional[str] = Field(None, min_length=8, max_length=100)
     
 
 class UserResponse(UserBase):
