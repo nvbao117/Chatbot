@@ -31,10 +31,10 @@ export const useAuth = () => {
 
   // Function đăng nhập - gọi API và dispatch Redux actions
   const login = useCallback(
-    async (email, password) => {
+    async (identifier, password) => {
       dispatch(loginStart())  // Bắt đầu loading
       try {
-        const response = await authService.login(email, password)
+        const response = await authService.login(identifier, password) 
         dispatch(loginSuccess(response))  // Đăng nhập thành công
         return response
       } catch (err) {

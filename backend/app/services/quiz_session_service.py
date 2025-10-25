@@ -40,7 +40,6 @@ class QuizSessionService:
         return QuizSessionResponse.model_validate(session)
     
     
-    
     def update_session(self, session: QuizSession, payload: QuizSessionUpdate) -> QuizSessionResponse:
         data = payload.model_dump(exclude_unset=True)
         for field, value in data.items():
