@@ -9,43 +9,103 @@ const initialState = {
   isTyping: false,
 }
 
+const updateActiveConversationStats = (state, timestamp) => {
+  if (!state.currentConversationId) return
+  const conversation = state.conversations.find((conv) => conv.id === state.currentConversationId)
+  if (!conversation) return
+
+  conversation.messageCount = state.messages.length
+  conversation.updatedAt = timestamp || new Date().toISOString()
+}
+
 const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
     startNewConversation: (state, action) => {
-      const conversationId = Date.now().toString()
+      const conversationId = action.payload?.id || Date.now().toString()
+      const title = action.payload?.title || "New Conversation"
+      const initialMessages = action.payload?.messages || []
+      const now = new Date().toISOString()
+
       state.currentConversationId = conversationId
-      state.messages = []
-      state.conversations.push({
-        id: conversationId,
-        title: action.payload?.title || "New Conversation",
-        createdAt: new Date().toISOString(),
-        messageCount: 0,
-      })
+      state.messages = initialMessages
+
+      const existingConversation = state.conversations.find((conv) => conv.id === conversationId)
+
+      if (existingConversation) {
+        existingConversation.title = title
+        existingConversation.messageCount = initialMessages.length
+        existingConversation.updatedAt = now
+      } else {
+        state.conversations.push({
+          id: conversationId,
+          title,
+          createdAt: action.payload?.createdAt || now,
+          updatedAt: now,
+          messageCount: initialMessages.length,
+        })
+      }
+    },
+
+    syncConversationId: (state, action) => {
+      const { conversationId, previousId, title } = action.payload || {}
+      if (!conversationId) return
+
+      let conversation = null
+
+      if (previousId) {
+        conversation = state.conversations.find((conv) => conv.id === previousId)
+        if (conversation) {
+          conversation.id = conversationId
+        }
+      }
+
+      if (!conversation) {
+        conversation = state.conversations.find((conv) => conv.id === conversationId)
+      }
+
+      if (!conversation) {
+        conversation = {
+          id: conversationId,
+          title: title || "New Conversation",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          messageCount: state.messages.length,
+        }
+        state.conversations.push(conversation)
+      }
+
+      if (title) {
+        conversation.title = title
+      }
+
+      state.currentConversationId = conversationId
+      conversation.messageCount = state.messages.length
+      conversation.updatedAt = new Date().toISOString()
     },
 
     addMessage: (state, action) => {
       const newMessage = {
         id: Date.now().toString(),
         content: action.payload.content,
-        sender: action.payload.sender, // 'user' or 'bot'
+        sender: action.payload.sender,
         timestamp: new Date().toISOString(),
-        type: action.payload.type || "text", // 'text', 'suggestion', 'code'
+        type: action.payload.type || "text",
       }
       state.messages.push(newMessage)
-      
-      // Sync with localStorage for ChatPage compatibility
+      updateActiveConversationStats(state, newMessage.timestamp)
+
       try {
-        const messagesForStorage = state.messages.map(msg => ({
+        const messagesForStorage = state.messages.map((msg) => ({
           id: msg.id,
           text: msg.content,
           sender: msg.sender,
-          timestamp: msg.timestamp
+          timestamp: msg.timestamp,
         }))
-        localStorage.setItem('chatHistory', JSON.stringify(messagesForStorage))
+        localStorage.setItem("chatHistory", JSON.stringify(messagesForStorage))
       } catch (error) {
-        console.error('Error saving to localStorage:', error)
+        console.error("Error saving to localStorage:", error)
       }
     },
 
@@ -64,6 +124,7 @@ const chatSlice = createSlice({
     loadConversation: (state, action) => {
       state.currentConversationId = action.payload.id
       state.messages = action.payload.messages || []
+      updateActiveConversationStats(state)
     },
 
     clearConversation: (state) => {
@@ -81,13 +142,14 @@ const chatSlice = createSlice({
     },
 
     loadMessagesFromStorage: (state, action) => {
-      state.messages = action.payload.map(msg => ({
-        id: msg.id || Date.now().toString() + Math.random(),
+      state.messages = action.payload.map((msg) => ({
+        id: msg.id || `${Date.now().toString()}-${Math.random()}`,
         content: msg.text || msg.content,
         sender: msg.sender,
         timestamp: msg.timestamp || new Date().toISOString(),
-        type: "text"
+        type: "text",
       }))
+      updateActiveConversationStats(state)
     },
 
     initializeFromStorage: (state, action) => {
@@ -101,6 +163,7 @@ const chatSlice = createSlice({
 
 export const {
   startNewConversation,
+  syncConversationId,
   addMessage,
   setIsTyping,
   setIsLoading,
