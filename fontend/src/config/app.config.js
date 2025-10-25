@@ -20,12 +20,11 @@ const SHOULD_USE_MOCK_CHATBOT =
 
 // Global application configuration
 export const APP_CONFIG = {
-  appName: "EduLearn",
-  appVersion: "1.0.0",
-  apiBaseUrl: import.meta.env.VITE_API_BASE_URL || "http://localhost:3001/api",
-  environment: import.meta.env.MODE,
-  debug: import.meta.env.DEV,
-  useMockChatbot: SHOULD_USE_MOCK_CHATBOT,
+  appName: "EduLearn",                                        // Tên ứng dụng
+  appVersion: "1.0.0",                                       // Phiên bản
+  apiBaseUrl: import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api/v1", // Base URL API
+  environment: import.meta.env.MODE,                         // Môi trường (dev/prod)
+  debug: import.meta.env.DEV,                                // Debug mode
 }
 
 // Danh sách môn học mặc định với icon và màu sắc

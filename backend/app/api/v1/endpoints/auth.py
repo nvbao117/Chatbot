@@ -13,24 +13,24 @@ from backend.app.services.auth_service import AuthService
 router = APIRouter()
 
 
-@router.post("/register",response_model=UserResponse,status_code=status.HTTP_201_CREATED) 
-def register(payload:RegisterRequest,db:Session=Depends(get_db)) : 
+@router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED) 
+def register(payload: RegisterRequest, db:Session=Depends(get_db)) -> UserResponse : 
     service = AuthService(db) 
     try:
         return service.register(payload) 
     except ValueError as exc : 
-        raise HTTPException(status_code=400,detail=str(exc)) 
+        raise HTTPException(status_code=400, detail=str(exc)) 
     
 
 @router.post("/login", response_model=Token) 
-def login(payload:LoginRequest,db:Session = Depends(get_db)):
+def login(payload: LoginRequest, db: Session = Depends(get_db)) -> Token:
     service = AuthService(db) 
     try:
         return service.authenticate(payload)
-    except ValueError as exc : 
-        raise HTTPException(status_code=400,detail=str(exc))
+    except ValueError as exc: 
+        raise HTTPException(status_code=400, detail=str(exc))
     
     
-@router.get("/me",response_model=UserResponse) 
-def me(current_user:User = Depends(get_current_active_user)):
-    return UserResponse.model_validate(current_user) 
+@router.get("/me", response_model=UserResponse)
+def me(current_user: User = Depends(get_current_active_user)) -> UserResponse:
+    return UserResponse.model_validate(current_user)

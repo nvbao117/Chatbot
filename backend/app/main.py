@@ -7,7 +7,7 @@ from backend.app.core.config import settings
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="Chatbot Study API",             
+    description="Chatbot Study API",
 )
 
 app.add_middleware(
@@ -15,7 +15,7 @@ app.add_middleware(
     allow_origins=settings.BACKEND_CORS_ORIGINS or ["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"], 
+    allow_headers=["*"],
 )
 
 prefix = settings.API_V1_STR

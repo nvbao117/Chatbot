@@ -1,6 +1,7 @@
 # backend/app/services/auth_service.py
 from datetime import timedelta
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 
 from backend.app.core import security
 from backend.app.core.config import settings
@@ -40,7 +41,10 @@ class AuthService:
     def authenticate(self, payload: LoginRequest) -> Token:
         user = (
             self.db.query(User)
-            .filter(User.username == payload.username)
+            .filter(or_(
+                    User.username == payload.identifier,
+                    User.email == payload.identifier,
+                ))
             .first()
         )
         if not user or not security.verify_password(payload.password, user.password_hash):
@@ -53,4 +57,8 @@ class AuthService:
             data={"sub": str(user.user_id)},
             expires_minutes=expires,
         )
-        return Token(access_token=access_token, expires_in=expires * 60)
+        return Token(
+            access_token=access_token,
+            expires_in=expires * 60,
+            user=UserResponse.model_validate(user),
+        )
