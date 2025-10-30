@@ -34,6 +34,27 @@
   animation: slideDown 0.3s ease;
 }
 
+/* Sidebar styles for larger screens */
+.sidebar {
+  display: none; /* hidden on small screens */
+  width: 100%;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e6eef8;
+  padding: 0.5rem 0.5rem 0.75rem 0.5rem;
+  height: 100%;
+  overflow: hidden;
+  max-height: none;
+  align-self: stretch;
+  flex-direction: column;
+}
+
+.sidebar .historyList {
+  flex: 1;
+  overflow-y: auto;
+}
+
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -81,6 +102,10 @@
   max-height: 300px;
   overflow-y: auto;
   padding: 0.5rem;
+}
+
+.sidebar .historyList {
+  max-height: none;
 }
 
 .emptyState {
@@ -159,5 +184,24 @@
   
   .historyItem {
     padding: 0.5rem;
+  }
+}
+
+/* Desktop: show sidebar, hide toggle and dropdown */
+@media (min-width: 1024px) {
+  .sidebar {
+    display: flex;
+  }
+
+  .toggleButton {
+    display: none;
+  }
+
+  .historyDropdown {
+    display: none;
+  }
+
+  .historyPanel {
+    display: block;
   }
 }

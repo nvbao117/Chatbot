@@ -89,144 +89,148 @@ export const ChatPage = () => {
   }
 
   return (
-    <div className={styles.chatPage}>
-      <div className={styles.header}>
-        <div className={styles.headerContent}>
-          <h1 className={styles.title}>Learning Assistant</h1>
-          <p className={styles.subtitle}>AI-powered study companion always ready to help</p>
-        </div>
-        <div className={styles.headerActions}>
-          <button
-            className={styles.newChatBtn}
-            onClick={() => {
-              localStorage.removeItem("chatHistory")
-              startChat({ title: "New Chat", messages: [] })
-            }}
-          >
-            New Chat
-          </button>
-        </div>
-      </div>
-
-      <div className={styles.mainContent}>
-        <ChatHistoryPanel
-          onSelectHistory={handleSelectHistory}
-          onClearHistory={() => {
-            localStorage.removeItem("chatHistory")
-            handleClearHistory()
-          }}
-        />
-
-        <div className={styles.messagesContainer}>
-          <div className={styles.messagesWrapper}>
-            {messages.length === 0 && (
-              <div className={styles.welcomeMessage}>
-                <h2 style={{ margin: "0 0 1rem 0", fontSize: "1.5rem", color: "#333" }}>
-                  Chao mung den voi Learning Assistant!
-                </h2>
-                <p style={{ margin: 0, color: "#666", fontSize: "1rem" }}>
-                  Toi o day de giup ban hoc tap hieu qua hon. Hay bat dau cuoc tro chuyen!
-                </p>
-              </div>
-            )}
-
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`${styles.message} ${message.sender === "user" ? styles.userMessage : styles.botMessage}`}
-              >
-                <div className={styles.messageContent}>
-                  <div className={styles.messageText}>
-                    {(message.content || "").split("\n").map((line, index) => (
-                      <p key={index} style={{ margin: line ? "0 0 8px 0" : 0 }}>
-                        {line}
-                      </p>
-                    ))}
-                  </div>
-                  {message.timestamp && (
-                    <div className={styles.messageTime}>
-                      {new Date(message.timestamp).toLocaleTimeString()}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-
-            {isTyping && (
-              <div className={`${styles.message} ${styles.botMessage}`}>
-                <div className={styles.messageContent}>
-                  <div className={styles.typingIndicator}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {error && (
-              <div className={`${styles.message} ${styles.botMessage}`}>
-                <div className={styles.messageContent}>
-                  <div className={styles.messageText}>
-                    <p style={{ margin: 0, color: "#dc2626" }}>{error}</p>
-                  </div>
-                </div>
-              </div>
-            )}
+    <section className={styles.pageWrapper}>
+      <div className={styles.chatPage}>
+        <div className={styles.header}>
+          <div className={styles.headerContent}>
+            <h1 className={styles.title}>Learning Assistant</h1>
+            <p className={styles.subtitle}>AI-powered study companion always ready to help</p>
           </div>
-          <div ref={messagesEndRef} />
-        </div>
-
-        {messages.length === 0 && !isTyping && (
-          <div className={styles.suggestions}>
-            <h3>Goi y cau hoi:</h3>
-            <div className={styles.suggestionGrid}>
-              {SUGGESTIONS.map((suggestion) => (
-                <button
-                  key={suggestion}
-                  className={styles.suggestionCard}
-                  onClick={() => setInputMessage(suggestion)}
-                >
-                  {suggestion}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div className={styles.inputContainer}>
-          <div className={styles.inputWrapper}>
-            <textarea
-              value={inputMessage}
-              onChange={(event) => setInputMessage(event.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Nhap cau hoi cua ban ve hoc tap..."
-              className={styles.textInput}
-              rows={1}
-              disabled={isTyping}
-            />
+          <div className={styles.headerActions}>
             <button
-              onClick={handleSendMessage}
-              disabled={!inputMessage.trim() || isTyping}
-              className={styles.sendButton}
+              className={styles.newChatBtn}
+              onClick={() => {
+                localStorage.removeItem("chatHistory")
+                startChat({ title: "New Chat", messages: [] })
+              }}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              New Chat
             </button>
           </div>
-          <div className={styles.inputFooter}>
-            <p>AI co the mac loi. Hay kiem tra thong tin quan trong.</p>
+        </div>
+
+        <div className={styles.mainContent}>
+          <ChatHistoryPanel
+            onSelectHistory={handleSelectHistory}
+            onClearHistory={() => {
+              localStorage.removeItem("chatHistory")
+              handleClearHistory()
+            }}
+          />
+
+          <div className={styles.chatContainer}>
+            <div className={styles.messagesContainer}>
+              <div className={styles.messagesWrapper}>
+                {messages.length === 0 && (
+                  <div className={styles.welcomeMessage}>
+                    <h2 style={{ margin: "0 0 1rem 0", fontSize: "1.5rem", color: "#333" }}>
+                      Chao mung den voi Learning Assistant!
+                    </h2>
+                    <p style={{ margin: 0, color: "#666", fontSize: "1rem" }}>
+                      Toi o day de giup ban hoc tap hieu qua hon. Hay bat dau cuoc tro chuyen!
+                    </p>
+                  </div>
+                )}
+
+                {messages.map((message) => (
+                  <div
+                    key={message.id}
+                    className={`${styles.message} ${message.sender === "user" ? styles.userMessage : styles.botMessage}`}
+                  >
+                    <div className={styles.messageContent}>
+                      <div className={styles.messageText}>
+                        {(message.content || "").split("\n").map((line, index) => (
+                          <p key={index} style={{ margin: line ? "0 0 8px 0" : 0 }}>
+                            {line}
+                          </p>
+                        ))}
+                      </div>
+                      {message.timestamp && (
+                        <div className={styles.messageTime}>
+                          {new Date(message.timestamp).toLocaleTimeString()}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+
+                {isTyping && (
+                  <div className={`${styles.message} ${styles.botMessage}`}>
+                    <div className={styles.messageContent}>
+                      <div className={styles.typingIndicator}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {error && (
+                  <div className={`${styles.message} ${styles.botMessage}`}>
+                    <div className={styles.messageContent}>
+                      <div className={styles.messageText}>
+                        <p style={{ margin: 0, color: "#dc2626" }}>{error}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div ref={messagesEndRef} />
+            </div>
+
+            {messages.length === 0 && !isTyping && (
+              <div className={styles.suggestions}>
+                <h3>Goi y cau hoi:</h3>
+                <div className={styles.suggestionGrid}>
+                  {SUGGESTIONS.map((suggestion) => (
+                    <button
+                      key={suggestion}
+                      className={styles.suggestionCard}
+                      onClick={() => setInputMessage(suggestion)}
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className={styles.inputContainer}>
+              <div className={styles.inputWrapper}>
+                <textarea
+                  value={inputMessage}
+                  onChange={(event) => setInputMessage(event.target.value)}
+                  onKeyDown={handleKeyPress}
+                  placeholder="Nhap cau hoi cua ban ve hoc tap..."
+                  className={styles.textInput}
+                  rows={1}
+                  disabled={isTyping}
+                />
+                <button
+                  onClick={handleSendMessage}
+                  disabled={!inputMessage.trim() || isTyping}
+                  className={styles.sendButton}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className={styles.inputFooter}>
+                <p>AI co the mac loi. Hay kiem tra thong tin quan trong.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
