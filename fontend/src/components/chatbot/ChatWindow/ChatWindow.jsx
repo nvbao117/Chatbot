@@ -115,7 +115,7 @@ export const ChatWindow = ({
           </div>
         )}
         
-        {messages.map((message) => (
+        {(Array.isArray(messages) ? messages.filter((m) => m && typeof m === 'object') : []).map((message) => (
           <div
             key={message.id}
             style={{

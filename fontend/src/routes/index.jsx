@@ -12,6 +12,7 @@ import { QuizPage } from "../pages/Quiz"
 import { ProgressPage } from "../pages/Progress"
 import { AchievementsPage } from "../pages/Achievements"
 import { ProfilePage } from "../pages/Profile"
+import { Chat } from "../pages/Chat"
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: "profile",
         element: <ProfilePage />,
+      },
+      {
+        path: "chat",
+        element: <Chat />,
       },
     ],
   },

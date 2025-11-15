@@ -12,19 +12,16 @@
  * - MODE: Environment mode (development/production)
  */
 
-// Cấu hình chung của ứng dụng
-const RAW_USE_MOCK_CHATBOT = import.meta.env.VITE_USE_MOCK_CHATBOT
-const SHOULD_USE_MOCK_CHATBOT =
-  RAW_USE_MOCK_CHATBOT === undefined
-    ? import.meta.env.MODE === "development"
-    : RAW_USE_MOCK_CHATBOT === "true"
+// Cấu hình chung của ứng dụng (production-like): luôn dùng API thật, tắt mock và debug
+const SHOULD_USE_MOCK_CHATBOT = false
 
 export const APP_CONFIG = {
   appName: "EduLearn",                                        // Tên ứng dụng
   appVersion: "1.0.0",                                       // Phiên bản
   apiBaseUrl: import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api/v1", // Base URL API
-  environment: import.meta.env.MODE,                         // Môi trường (dev/prod)
-  debug: import.meta.env.DEV,                                // Debug mode
+  environment: "production",                                  // Cố định production-like
+  debug: false,                                                // Tắt debug
+  useMockChatbot: SHOULD_USE_MOCK_CHATBOT,                     // Không dùng mock
 }
 
 // Danh sách môn học mặc định với icon và màu sắc

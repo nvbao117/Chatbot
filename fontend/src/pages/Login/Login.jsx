@@ -1,17 +1,3 @@
-/**
- * Trang Đăng Nhập
- * 
- * Component này render trang đăng nhập với thiết kế siêu hiện đại bao gồm:
- * - Background gradient động với các hình dạng trôi nổi
- * - Hiệu ứng theo dõi chuột
- * - Carousel giới thiệu các tính năng của ứng dụng
- * - Phần thống kê với các chỉ số quan trọng
- * - Form đăng nhập với tùy chọn đăng nhập xã hội
- * 
- * Trang được thiết kế để vừa trong một màn hình không cần cuộn
- * và cung cấp trải nghiệm người dùng hấp dẫn về mặt thị giác.
- */
-
 import { useState, useEffect } from "react"
 import { LoginForm } from "../../components/auth"
 import styles from "./Login.module.css"
@@ -80,7 +66,6 @@ export const Login = () => {
           <div className={styles.shape4}></div>
           <div className={styles.shape5}></div>
         </div>
-        {/* Hiệu ứng theo dõi chuột */}
         <div 
           className={styles.mouseFollower}
           style={{
@@ -108,7 +93,7 @@ export const Login = () => {
               <div 
                 className={styles.carouselTrack}
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-              >
+              > 
                 {features.map((feature, index) => (
                   <div key={index} className={styles.featureSlide}>
                     <div 

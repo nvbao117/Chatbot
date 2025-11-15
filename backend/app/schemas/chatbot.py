@@ -5,27 +5,23 @@ from uuid import UUID
 from pydantic import BaseModel, Field
 
 
-class ChatRequest(BaseModel):
-    user_id: UUID
+class ChatRequestBaseModel(BaseModel):
     message: str = Field(..., min_length=1, max_length=5000)
-    conversation_id: Optional[UUID] = None
-    subject_id: Optional[int] = None
-    topic_id: Optional[int] = None
+    conversationid: Optional[UUID] = None
     
 
-class ChatMessage(BaseModel):
-    message_id: UUID
-    sender: str  # 'user' / 'assistant' / 'system'
+class ChatMessageBaseModel(BaseModel):
+    messageid: UUID
+    sender: str  # 'user', 'assistant', 'system'
     content: str
-    created_at: datetime
-    tokens_used: Optional[int] = None
-    processing_time_ms: Optional[int] = None
+    createdat: datetime
+    tokensused: Optional[int] = None
 
 
-class ChatResponse(BaseModel):
-    conversation_id: UUID
-    messages: List[ChatMessage]
-    total_tokens_used: int = 0
+class ChatResponseBaseModel(BaseModel):
+    conversationid: UUID
+    messages: List[ChatMessageBaseModel]
+    totaltokensused: int = 0
 
 
 class ChatbotConfig(BaseModel):

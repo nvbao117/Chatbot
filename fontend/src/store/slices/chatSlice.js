@@ -142,10 +142,12 @@ const chatSlice = createSlice({
     },
 
     loadMessagesFromStorage: (state, action) => {
-      state.messages = action.payload.map((msg) => ({
+      const safe = (Array.isArray(action.payload) ? action.payload : [])
+        .filter((msg) => msg && (typeof msg === "object"))
+      state.messages = safe.map((msg) => ({
         id: msg.id || `${Date.now().toString()}-${Math.random()}`,
-        content: msg.text || msg.content,
-        sender: msg.sender,
+        content: msg.text || msg.content || msg.message || "",
+        sender: msg.sender || (msg.role === "assistant" ? "bot" : "bot"),
         timestamp: msg.timestamp || new Date().toISOString(),
         type: "text",
       }))

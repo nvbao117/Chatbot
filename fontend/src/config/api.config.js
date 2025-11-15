@@ -67,8 +67,8 @@ export const API_ENDPOINTS = {
 
   // Chatbot endpoints - Quản lý chat với AI
   CHATBOT: {
-    SEND: "/chatbot/send",                                // Gửi tin nhắn đến chatbot
-    HISTORY: "/chatbot/history",                          // Lấy lịch sử chat
-    CLEAR: "/chatbot/clear",                              // Xóa lịch sử chat
+    SEND: "/chatbot/chat",                                // Gửi tin nhắn đến chatbot (khớp backend)
+    HISTORY: "/chatbot/history",                          // Lấy lịch sử chat (chưa dùng)
+    CLEAR: "/chatbot/clear",                              // Xóa lịch sử chat (chưa dùng)
   },
 }

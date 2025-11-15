@@ -34,6 +34,7 @@ import { AdminTest } from "./pages/Admin/AdminTest"      // Trang test admin
 import { ProtectedRoute } from "./components/auth/ProtectedRoute"  // Bảo vệ route cần đăng nhập
 import { AdminRoute } from "./components/auth/AdminRoute"          // Bảo vệ route admin
 import { MainLayout } from "./layouts/MainLayout"                 // Layout chính
+import ErrorBoundary from "./components/common/ErrorBoundary"
 
 import "./App.css"
 
@@ -141,7 +142,9 @@ function App() {
             element={
               <ProtectedRoute>
                 <MainLayout>
-                  <Chat />
+                  <ErrorBoundary>
+                    <Chat />
+                  </ErrorBoundary>
                 </MainLayout>
               </ProtectedRoute>
             }

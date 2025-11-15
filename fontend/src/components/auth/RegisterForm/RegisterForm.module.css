@@ -1,7 +1,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.5rem;
   width: 100%;
   max-width: 450px;
   margin: 0 auto;
@@ -106,7 +106,6 @@
 
 .submitBtn {
   width: 100%;
-  margin-top: 1rem;
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
   border: none;

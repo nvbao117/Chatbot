@@ -36,7 +36,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
     # Third-party integrations
-    CLAUDE_API_KEY: str | None = None
+    ANTHROPIC_API_KEY: str | None = None
     
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
     @classmethod

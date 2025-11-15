@@ -13,13 +13,16 @@ const SUGGESTIONS = [
 ]
 
 const normalizeStoredMessages = (history = []) =>
-  history.map((msg) => ({
-    id: msg.id || `${Date.now()}-${Math.random()}`,
-    content: msg.text || msg.content || "",
-    sender: msg.sender || "bot",
-    timestamp: msg.timestamp || new Date().toISOString(),
-    type: "text",
-  }))
+  (Array.isArray(history) ? history : [])
+    .flatMap((item) => (Array.isArray(item?.messages) ? item.messages : [item]))
+    .filter((item) => item && (typeof item === "object"))
+    .map((msg) => ({
+      id: msg.id || `${Date.now()}-${Math.random()}`,
+      content: msg.text || msg.content || msg.message || "",
+      sender: msg.sender || (msg.role === "assistant" ? "bot" : "bot"),
+      timestamp: msg.timestamp || new Date().toISOString(),
+      type: "text",
+    }))
 
 export const ChatPage = () => {
   const {
@@ -132,7 +135,7 @@ export const ChatPage = () => {
                   </div>
                 )}
 
-                {messages.map((message) => (
+                {(Array.isArray(messages) ? messages.filter((m) => m && typeof m === 'object') : []).map((message) => (
                   <div
                     key={message.id}
                     className={`${styles.message} ${message.sender === "user" ? styles.userMessage : styles.botMessage}`}
